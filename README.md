@@ -17,11 +17,12 @@ sudo vim /etc/apache2/extra/httpd-vhosts.conf
     ServerAdmin admin@example.com
     ServerName filecab.com
     ServerAlias www.filecab.com
-    DocumentRoot /Library/WebServer/Documents/myarchive.com
+    DocumentRoot /Library/WebServer/Documents/filecab.com/build
     ErrorLog /private/var/log/apache2/filecab_error.log
     CustomLog /private/var/log/apache2/filecab_access.log combined
 </VirtualHost>
 ```
+Copy the ReactApp's `build` directory to `/Library/WebServer/Documents/filecab.com/`
 
 ```bash
 sudo vim /etc/hosts
@@ -36,6 +37,13 @@ sudo vim /etc/hosts
 sudo vim /etc/apache2/httpd.conf
 ```
 
+```bash
+sudo apachectl restart
+```
+
+Go to http://filecab.com/
+
+**Optional** 
 ```bash
 <Directory "/Library/WebServer/Documents">
     #
@@ -65,9 +73,3 @@ sudo vim /etc/apache2/httpd.conf
     Require all granted
 </Directory>
 ```
-
-```bash
-sudo apachectl restart
-```
-
-Go to http://filecab.com/
