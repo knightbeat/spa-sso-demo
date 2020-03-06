@@ -34,16 +34,15 @@ sudo vim /etc/hosts
 ```
 
 ```bash
-sudo vim /etc/apache2/httpd.conf
-```
-
-```bash
 sudo apachectl restart
 ```
 
 Go to http://filecab.com/
 
 **Optional** 
+```bash
+sudo vim /etc/apache2/httpd.conf
+```
 ```bash
 <Directory "/Library/WebServer/Documents">
     #
