@@ -18,6 +18,15 @@ sudo vim /etc/apache2/extra/httpd-vhosts.conf
     ServerName filecab.com
     ServerAlias www.filecab.com
     DocumentRoot /Library/WebServer/Documents/filecab.com/build
+    <Directory "/Library/WebServer/Documents/filecab.com/build">
+        RewriteEngine on
+        # Don't rewrite files or directories
+        RewriteCond %{REQUEST_FILENAME} -f [OR]
+        RewriteCond %{REQUEST_FILENAME} -d
+        RewriteRule ^ - [L]
+        # Rewrite everything else to index.html to allow html5 state links
+        RewriteRule ^ index.html [L]
+    </Directory>
     ErrorLog /private/var/log/apache2/filecab_error.log
     CustomLog /private/var/log/apache2/filecab_access.log combined
 </VirtualHost>
@@ -25,25 +34,12 @@ sudo vim /etc/apache2/extra/httpd-vhosts.conf
 Copy the ReactApp's `build` directory to `/Library/WebServer/Documents/filecab.com/`
 
 ```bash
-sudo vim /etc/hosts
-```
-
-```erlang
-127.0.0.1       filecab.com
-127.0.0.1       myhttpd.com
-```
-
-```bash
-sudo apachectl restart
-```
-
-Go to http://filecab.com/
-
-**Optional** 
-```bash
 sudo vim /etc/apache2/httpd.conf
 ```
 ```bash
+
+LoadModule rewrite_module libexec/apache2/mod_rewrite.so
+
 <Directory "/Library/WebServer/Documents">
     #
     # Possible values for the Options directive are "None", "All",
@@ -72,3 +68,19 @@ sudo vim /etc/apache2/httpd.conf
     Require all granted
 </Directory>
 ```
+
+```bash
+sudo vim /etc/hosts
+```
+
+```erlang
+127.0.0.1       filecab.com
+127.0.0.1       myhttpd.com
+```
+
+```bash
+sudo apachectl restart
+```
+
+Go to http://filecab.com/
+
