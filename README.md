@@ -31,6 +31,8 @@ sudo vim /etc/apache2/extra/httpd-vhosts.conf
     CustomLog /private/var/log/apache2/filecab_access.log combined
 </VirtualHost>
 ```
+Reference: To react-router work on Apache web server https://gkedge.gitbooks.io/react-router-in-the-real/content/apache.html
+
 Copy the ReactApp's `build` directory to `/Library/WebServer/Documents/filecab.com/`
 
 ```bash
